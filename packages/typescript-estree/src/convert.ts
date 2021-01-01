@@ -1921,7 +1921,7 @@ export class Converter {
       // Literals
 
       case SyntaxKind.StringLiteral: {
-        const result = this.createNode<TSESTree.Literal>(node, {
+        const result = this.createNode<TSESTree.StringLiteral>(node, {
           type: AST_NODE_TYPES.Literal,
           raw: '',
           value: '',
@@ -1936,7 +1936,7 @@ export class Converter {
       }
 
       case SyntaxKind.NumericLiteral: {
-        return this.createNode<TSESTree.Literal>(node, {
+        return this.createNode<TSESTree.NumberLiteral>(node, {
           type: AST_NODE_TYPES.Literal,
           value: Number(node.text),
           raw: node.getText(),
@@ -1969,11 +1969,11 @@ export class Converter {
         let regex = null;
         try {
           regex = new RegExp(pattern, flags);
-        } catch (exception) {
+        } catch (exception: unknown) {
           regex = null;
         }
 
-        return this.createNode<TSESTree.Literal>(node, {
+        return this.createNode<TSESTree.RegExpLiteral>(node, {
           type: AST_NODE_TYPES.Literal,
           value: regex,
           raw: node.text,
@@ -1985,14 +1985,14 @@ export class Converter {
       }
 
       case SyntaxKind.TrueKeyword:
-        return this.createNode<TSESTree.Literal>(node, {
+        return this.createNode<TSESTree.BooleanLiteral>(node, {
           type: AST_NODE_TYPES.Literal,
           value: true,
           raw: 'true',
         });
 
       case SyntaxKind.FalseKeyword:
-        return this.createNode<TSESTree.Literal>(node, {
+        return this.createNode<TSESTree.BooleanLiteral>(node, {
           type: AST_NODE_TYPES.Literal,
           value: false,
           raw: 'false',
@@ -2006,7 +2006,7 @@ export class Converter {
           });
         }
 
-        return this.createNode<TSESTree.Literal>(node, {
+        return this.createNode<TSESTree.NullLiteral>(node, {
           type: AST_NODE_TYPES.Literal,
           value: null,
           raw: 'null',
@@ -2150,7 +2150,7 @@ export class Converter {
             range: [start, end],
           });
         } else {
-          return this.createNode<TSESTree.Literal>(node, {
+          return this.createNode<TSESTree.StringLiteral>(node, {
             type: AST_NODE_TYPES.Literal,
             value: this.ast.text.slice(start, end),
             raw: this.ast.text.slice(start, end),

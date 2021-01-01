@@ -92,6 +92,7 @@
     "eslint-plugin-eslint-plugin": "^2.3.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jest": "^23.20.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
     "glob": "^7.1.6",
     "husky": "^4.2.5",
     "isomorphic-fetch": "^2.2.1",
